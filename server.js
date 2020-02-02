@@ -212,7 +212,7 @@ const getState = io => Promise.resolve().then(() => {
     Object.keys(io.sockets.adapter.rooms).reduce((data, name) => {
       const info = io.sockets.adapter.rooms[name]
       const sockets = Object.entries(io.sockets.sockets)
-        .map(([id, socket]) => ({ id, connectedAt: socket.handshake.issued }))
+        .map(([id, socket]) => ({ id, connectedAt: socket.handshake.issued, metadata: socket.metadata }))
         .filter(({ id }) => info.sockets[id] && io.sockets.sockets[id])
 
       return fn(data, sockets, name)
